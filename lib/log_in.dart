@@ -1,92 +1,119 @@
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Login Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
-    );
-  }
-}
-
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String _email, _password;
+class loginScreen extends StatelessWidget {
+  const loginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              // Logo
-              Image.asset('assets/logo.png', height: 100),
-
-              // Email
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter an email';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _email = value!,
+        body: Stack(
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Color(0xffB81736),
+                  Color(0xff281537),
+                ]),
               ),
-
-              // Password
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _password = value!,
+              child: const Padding(
+                padding: EdgeInsets.only(top: 60.0, left: 22),
+                child: Text(
+                  'Hello\nBAIUSTian!',
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-
-              // Login button
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    // TODO: Implement login logic here
-                    print('Email: $_email, Password: $_password');
-                  }
-                },
-                child: Text('Log In'),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 200.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+                  color: Colors.white,
+                ),
+                height: double.infinity,
+                width: double.infinity,
+                child:  Padding(
+                  padding: const EdgeInsets.only(left: 18.0,right: 18),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Gmail',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
+                            label: Text('Password',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const SizedBox(height: 20,),
+                      const Align(
+                        alignment: Alignment.centerRight,
+                        child: Text('Forgot Password?',style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Color(0xff281537),
+                        ),),
+                      ),
+                      const SizedBox(height: 70,),
+                      Container(
+                        height: 55,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: const LinearGradient(
+                              colors: [
+                                Color(0xffB81736),
+                                Color(0xff281537),
+                              ]
+                          ),
+                        ),
+                        child: const Center(child: Text('SIGN IN',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white
+                        ),),),
+                      ),
+                      const SizedBox(height: 150,),
+                      const Align(
+                        alignment: Alignment.bottomRight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text("Don't have account?",style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey
+                            ),),
+                            Text("Sign up",style: TextStyle(///done login page
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                                color: Colors.black
+                            ),),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-
-              // Register button
-              TextButton(
-                onPressed: () {
-                  // TODO: Implement register logic here
-                  print('Register button pressed');
-                },
-                child: Text('Don\'t have an account? Register'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          ],
+        ));
   }
 }

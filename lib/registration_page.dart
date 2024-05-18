@@ -1,101 +1,153 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegScreen extends StatefulWidget {
+  const RegScreen({Key? key}) : super(key: key);
+
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  State<RegScreen> createState() => _RegScreenState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  late File _image;
-  final picker = ImagePicker();
-
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  final _nameController = TextEditingController();
-  final _idController = TextEditingController();
-  final _departmentController = TextEditingController();
-  final _batchController = TextEditingController();
-  final _passingYearController = TextEditingController();
-  final _experiencesController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
+class _RegScreenState extends State<RegScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Center(
-                child: _image == null
-                    ? Text('No image selected.')
-                    : Image.file(_image),
+        body: Stack(//thanks for watching
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Color(0xffB81736),
+                  Color(0xff281537),
+                ]),
               ),
-              ElevatedButton(
-                onPressed: getImage,
-                child: Text('Upload Photo'),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 60.0, left: 22),
+                child: Text(
+                  'Create Your\nAccount',
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-              TextField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 200.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+                  color: Colors.white,
+                ),
+                height: double.infinity,
+                width: double.infinity,
+                child:  Padding(
+                  padding: const EdgeInsets.only(left: 18.0,right: 18),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Full Name',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Id',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Department',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Batch',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Passing Year',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Experience',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.check,color: Colors.grey,),
+                            label: Text('Email',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
+                            label: Text('Password',style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color:Color(0xffB81736),
+                            ),)
+                        ),
+                      ),
+
+                      const SizedBox(height: 10,),
+                      const SizedBox(height: 70,),
+                      Container(
+                        height: 55,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: const LinearGradient(
+                              colors: [
+                                Color(0xffB81736),
+                                Color(0xff281537),
+                              ]
+                          ),
+                        ),
+                        child: const Center(child: Text('SIGN UP',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white
+                        ),),),
+                      ),
+
+                    ],
+                  ),
+                ),
               ),
-              TextField(
-                controller: _idController,
-                decoration: InputDecoration(labelText: 'Id'),
-              ),
-              TextField(
-                controller: _departmentController,
-                decoration: InputDecoration(labelText: 'Department'),
-              ),
-              TextField(
-                controller: _batchController,
-                decoration: InputDecoration(labelText: 'Batch'),
-              ),
-              TextField(
-                controller: _passingYearController,
-                decoration: InputDecoration(labelText: 'Passing Year'),
-              ),
-              TextField(
-                controller: _experiencesController,
-                decoration: InputDecoration(labelText: 'Experiences'),
-              ),
-              TextField(
-                controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-              ),
-              TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle register button press
-                },
-                child: Text('Register'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          ],
+        ));
   }
 }
